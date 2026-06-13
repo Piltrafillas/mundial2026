@@ -1,0 +1,17 @@
+export const participantes = [
+  { nombre: "Carlos", puntos: 128 },
+  { nombre: "Elena", puntos: 122 },
+  { nombre: "Mau", puntos: 119 },
+  { nombre: "Elisa", puntos: 115 },
+  { nombre: "Daniel", puntos: 110 },
+  { nombre: "Pedro", puntos: 105 },
+  { nombre: "Juan", puntos: 101 },
+  { nombre: "Luis", puntos: 99 },
+  { nombre: "Ana", puntos: 95 },
+  { nombre: "María", puntos: 91 },
+  { nombre: "Javi", puntos: 88 },
+  { nombre: "Miguel", puntos: 85 },
+  { nombre: "Sergio", puntos: 82 },
+  { nombre: "Raúl", puntos: 80 },
+  { nombre: "Pablo", puntos: 77 },
+];
