@@ -1,6 +1,9 @@
 import { supabase } from "@/lib/supabase";
 import SelectorGoles from "@/components/SelectorGoles";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function GoleadoresPage() {
 
   const { data: jugadores, error } = await supabase

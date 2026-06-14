@@ -2,6 +2,9 @@ import { supabase } from "@/lib/supabase";
 import SelectorEquipo from "@/components/SelectorEquipo";
 import SelectorEquiposMultiple from "@/components/SelectorEquiposMultiple";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function FasesPage() {
 
   const { data: estado } = await supabase

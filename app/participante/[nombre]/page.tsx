@@ -1,6 +1,9 @@
 import { supabase } from "@/lib/supabase";
 import { calcularPuntosParticipantes } from "@/lib/calcularPuntosParticipantes";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function ParticipantePage({
   params,
 }: {
