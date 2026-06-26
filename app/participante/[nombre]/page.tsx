@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { calcularPuntosParticipantes } from "@/lib/calcularPuntosParticipantes";
+import { equipoSigueVivo } from "@/lib/equipoSigueVivo";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -22,6 +23,11 @@ export default async function ParticipantePage({
     .select("*")
     .eq("participante", nombre)
     .single();
+	
+  const { data: estado } = await supabase
+    .from("estado_mundial")
+    .select("*")
+    .single();
 
   const puntos = await calcularPuntosParticipantes(nombre);
 
@@ -39,15 +45,34 @@ export default async function ParticipantePage({
 
       <ul className="mb-8">
 
-        {equipos?.map((e) => (
+  {equipos?.map((e) => {
 
-          <li key={e.equipo}>
-            {e.equipo}
-          </li>
+    const vivo = equipoSigueVivo(e.equipo, estado);
 
-        ))}
+    return (
 
-      </ul>
+      <li
+        key={e.equipo}
+        className="flex items-center gap-3 py-1"
+      >
+
+        <span
+          className={`w-3 h-3 rounded-full ${
+            vivo
+              ? "bg-green-500"
+              : "bg-red-500"
+          }`}
+        />
+
+        <span>{e.equipo}</span>
+
+      </li>
+
+    );
+
+  })}
+
+</ul>
 
       <h2 className="text-2xl font-bold mb-4">
         Goleadores
