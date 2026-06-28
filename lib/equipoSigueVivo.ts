@@ -2,28 +2,32 @@ export function equipoSigueVivo(
   equipo: string,
   estado: any
 ) {
-  // Si aún no se ha definido ninguna fase,
-  // todos los equipos se consideran vivos.
-  if (
-    !estado ||
-    (
-      !estado.dieciseisavos?.length &&
-      !estado.octavos?.length &&
-      !estado.cuartos?.length &&
-      !estado.semifinales?.length &&
-      !estado.finalistas?.length &&
-      !estado.campeon
-    )
-  ) {
+  if (!estado) return true;
+
+  // Determinar cuál es la última fase rellenada
+
+  let faseActual: string[] | null = null;
+
+  if (estado.campeon) {
+    faseActual = [estado.campeon];
+  } else if (estado.finalistas?.length > 0) {
+    faseActual = estado.finalistas;
+  } else if (estado.semifinales?.length > 0) {
+    faseActual = estado.semifinales;
+  } else if (estado.cuartos?.length > 0) {
+    faseActual = estado.cuartos;
+  } else if (estado.octavos?.length > 0) {
+    faseActual = estado.octavos;
+  } else if (estado.dieciseisavos?.length > 0) {
+    faseActual = estado.dieciseisavos;
+  }
+
+  // Si todavía no se ha introducido ninguna fase,
+  // todos siguen vivos.
+
+  if (!faseActual) {
     return true;
   }
 
-  return (
-    estado.dieciseisavos?.includes(equipo) ||
-    estado.octavos?.includes(equipo) ||
-    estado.cuartos?.includes(equipo) ||
-    estado.semifinales?.includes(equipo) ||
-    estado.finalistas?.includes(equipo) ||
-    estado.campeon === equipo
-  );
+  return faseActual.includes(equipo);
 }
